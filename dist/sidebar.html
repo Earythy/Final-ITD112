@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Dashboard</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- ===== Iconscout CSS ===== -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="assets/css/signin.css">
+    
+  <script src="https://kit.fontawesome.com/334c45a40c.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+</head>
+
+<body>
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+
+      <ul class="sidebar-nav" id="sidebar-nav">
+  
+        <li class="nav-item">
+          <a class="nav-link " href="dashboard.html">
+            <i class="bi bi-grid"></i>
+            <span>Dashboard</span>
+          </a>
+        </li><!-- End Dashboard Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+              <a href="dengue-form.html">
+                <i class="bi bi-circle"></i><span>Dengue Form</span>
+              </a>
+            </li>
+          </ul>
+        </li><!-- End Forms Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <li>
+                  <a href="dengue-table.html">
+                    <i class="bi bi-circle"></i><span>Dengue Table</span>
+                  </a>
+                </li>
+          </ul>
+        </li><!-- End Tables Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+            <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+          </a>
+          <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+              <li>
+                  <a href="dengue-charts.html">
+                    <i class="bi bi-circle"></i><span>Dengue Charts</span>
+                  </a>
+                </li>
+          </ul>
+        </li><!-- End Charts Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="read-csv.html">
+            <i class="bi bi-file-earmark-spreadsheet"></i>
+            <span>Read CSV/Exceel</span>
+          </a>
+        </li>
+  
+        <li class="nav-heading">Pages</li>
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="users-profile.html">
+            <i class="bi bi-person"></i>
+            <span>Profile</span>
+          </a>
+        </li><!-- End Profile Page Nav -->
+  
+        <li class="nav-item">
+          <a class="nav-link collapsed" href="pages-faq.html">
+            <i class="bi bi-question-circle"></i>
+            <span>F.A.Q</span>
+          </a>
+        </li><!-- End F.A.Q Page Nav -->
+  
+      </ul>
+  
+    </aside><!-- End Sidebar-->
+
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script src="bundle.js"></script>
+
+  <script>
+    // Check if the user is authenticated
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      // Redirect to the login page if not authenticated
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <script type="module">
+  
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+  apiKey: "AIzaSyD8N5Yx1JeuhxA8chqk7GPD_lT3FwZZZBI",
+  authDomain: "data-storytelling-itd112-bd302.firebaseapp.com",
+  projectId: "data-storytelling-itd112-bd302",
+  storageBucket: "data-storytelling-itd112-bd302.appspot.com",
+  messagingSenderId: "697986110383",
+  appId: "1:697986110383:web:a2bbedf7a20c843266d55a",
+  measurementId: "G-K8PJFJTBEY"
+};
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const auth = getAuth(app);
+    console.log(app);
+  
+  
+      // Logout Button Click Event
+      document.addEventListener("DOMContentLoaded", function () {
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", function () {
+            signOut(auth).then(() => {
+              // Sign-out successful.
+              localStorage.removeItem('user'); // Clear user data from localStorage
+              // Show success alert using SweetAlert
+              Swal.fire({
+                icon: 'success',
+                title: 'Logged Out Successfully',
+                text: 'Redirecting to Login page...',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+              }).then(() => {
+                // Redirect to the login page
+                window.location.href = "login.html";
+              });
+            }).catch((error) => {
+              // An error happened.
+              console.error('Logout Error:', error);
+            });
+          });
+        }
+      });
+    </script>
+</body>
+</html>

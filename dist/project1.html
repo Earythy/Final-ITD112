@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <!-- Favicons -->
+    <link href="images/final-logo.png" rel="icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS (Popper.js and Bootstrap JS) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.15.0/font/bootstrap-icons.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Include DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
+
+      <!-- Include DataTables CSS with additional styling -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.css">
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="assets/css/signin.css">
+        
+    <script src="https://kit.fontawesome.com/334c45a40c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+<!-- ======= Navigation ======= -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <a class="navbar-brand" href="dashboard.html">Project 1</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto"> <!-- Use ms-auto to push items to the right -->
+      <li class="nav-item active">
+        <a class="nav-link" href="dashboard.html">Dashboard <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="project2.html">Project 2 <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="project3.html">Project 3 <span class="sr-only"></span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="logoutBtn" href="#">
+          <!-- Replace the text with a Bootstrap icon for logout -->
+          <i class="bi bi-box-arrow-up"></i>Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ======= Main ======= -->
+<div class="card">
+    <div class="card-body">
+
+        <div class="container">
+            <!-- Container for file input and buttons with dark blue transparent background -->
+            <div class="file-container">
+                <h5 class="card-title">Add Dengue Case</h5>
+                <!-- Add Dengue Case -->
+                <form class="add" id="addForm">
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="loc" placeholder="Location" name="loc" required>
+                            <label for="loc">Location</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="cases" placeholder="Number of Cases" name="cases" required>
+                            <label for="cases">Number of Cases</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="deaths" placeholder="Number of Deaths" name="deaths" required>
+                            <label for="deaths">Number of Deaths</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="date" class="form-control" id="reportedAt" placeholder="Date Reported" name="date" required>
+                            <label for="reportedAt">Date Reported</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="region" name="region" required>
+                            <option value="" selected disabled>Select a Region</option>
+                            <option value="Region I - Ilocos Region">Region I - Ilocos Region</option>
+                            <option value="Region II - Cagayan Valley">Region II - Cagayan Valley</option>
+                            <option value="Region III - Central Luzon">Region III - Central Luzon</option>
+                            <option value="Region IV-A - Calabarzon">Region IV-A - Calabarzon</option>
+                            <option value="Region IV-B - Mimaropa">Region IV-B - Mimaropa</option>
+                            <option value="Region V - Bicol Region">Region V - Bicol Region</option>
+                            <option value="Region VI - Western Visayas">Region VI - Western Visayas</option>
+                            <option value="Region VII - Central Visayas">Region VII - Central Visayas</option>
+                            <option value="Region VIII - Eastern Visayas">Region VIII - Eastern Visayas</option>
+                            <option value="Region IX - Zamboanga Peninsula">Region IX - Zamboanga Peninsula</option>
+                            <option value="Region X - Northern Mindanao">Region X - Northern Mindanao</option>
+                            <option value="Region XI - Davao Region">Region XI - Davao Region</option>
+                            <option value="Region XII - Soccsksargen">Region XII - Soccsksargen</option>
+                            <option value="Region XIII - Caraga">Region XIII - Caraga</option>
+                            <option value="National Capital Region (NCR) - Metro Manila">National Capital Region (NCR) - Metro Manila</option>
+                            <option value="Cordillera Administrative Region (CAR)">Cordillera Administrative Region (CAR)</option>
+                            <option value="Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)">Bangsamoro Autonomous Region in Muslim Mindanao (BARMM)</option>
+                        </select>
+                        <label for="region">Region</label>
+                    </div>
+                </div>
+            
+                    <div class="text-center">
+                        <!-- <a href="dengue-table.html" class="btn btn-danger">Cancel</a> -->
+                        <button type="reset" class="btn btn-warning">Reset</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                
+                </form><!-- End Form -->
+            </div>
+        </div><br>
+
+        <div class="container">
+            <!-- Container for file input and buttons with dark blue transparent background -->
+            <div class="file-container">
+                <h5 class="card-title">Data Visualization</h5>
+
+                    <section class="section">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">Line Chart</h5>
+                            <!-- Line Chart -->
+                            <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                            <!-- End Line CHart -->
+                          </div>
+                        </div>
+                
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Bar Chart</h5>
+                
+                              <!-- Bar Chart -->
+                              <canvas id="barChart" style="max-height: 400px;"></canvas>
+                              <!-- End Bar CHart -->
+                
+                            </div>
+                          </div>
+                
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Pie Chart</h5>
+                              <!-- Pie Chart -->
+                              <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                              <!-- End Pie CHart -->
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Doughnut Chart</h5>
+                
+                              <!-- Doughnut Chart -->
+                              <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
+                              <!-- End Doughnut CHart -->
+                
+                            </div>
+                          </div>
+                
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Radar Chart</h5>
+                
+                              <!-- Radar Chart -->
+                              <canvas id="radarChart" style="max-height: 400px;"></canvas>
+                              <!-- End Radar CHart -->
+                
+                            </div>
+                          </div>
+    
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Polar Area Chart</h5>
+                
+                              <!-- Polar Area Chart -->
+                              <canvas id="polarAreaChart" style="max-height: 400px;"></canvas>
+            
+                              <!-- End Polar Area Chart -->
+                
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Stacked Bar Chart</h5>
+                
+                              <!-- Stacked Bar Chart -->
+                              <canvas id="stackedBarChart" style="max-height: 400px;"></canvas>
+                              <!-- End Stacked Bar Chart -->
+                
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-body">
+                              <h5 class="card-title">Bubble Chart</h5>
+                
+                              <!-- Bubble Chart -->
+                              <canvas id="bubbleChart" style="max-height: 400px;"></canvas>  
+                              <!-- End Bubble Chart -->
+                
+                            </div>
+                          </div>
+                        </section>
+                    </div>
+                  </div><br>
+
+                  <div class="container">
+                    <div class="file-container">
+                    
+                      <h5 class="card-title">Data Table</h5>
+                  
+                      <!-- Table with stripped rows -->
+                      <div class="table-responsive" id="dashboard">
+                        <table class="table table-hover" id="dashboardTable">
+                          <thead class="table-dark">
+                            <tr>
+                              <th>Location</th>
+                              <th>No of Cases</th>
+                              <th>No of Deaths</th>
+                              <th>Date Reported</th>
+                              <th>Region</th>
+                              <th style="width: 80px">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody id="dashboardTableBody">
+                            <!-- Display Data Here -->
+                          </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+                      </div>
+                </div>
+              </div>
+
+                  <!-- Modal for Edit Case -->
+                  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="editModalLabel">Edit Case</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- Your form fields for editing here -->
+                          <form id="editCaseForm">
+                            <input type="hidden" id="editId">
+                            <div class="mb-3">
+                              <label for="editLoc" class="form-label">Location</label>
+                              <input type="text" class="form-control" id="editLoc" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="editCases" class="form-label">Number of Cases</label>
+                              <input type="number" class="form-control" id="editCases" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="editDeaths" class="form-label">Number of Deaths</label>
+                              <input type="number" class="form-control" id="editDeaths" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="editReportedAt" class="form-label">Date</label>
+                              <input type="date" class="form-control" id="editReportedAt" required>
+                            </div>
+                            <div class="mb-3">
+                              <label for="editRegion" class="form-label">Region</label>
+                              <input type="text" class="form-control" id="editRegion" required>
+                            </div>
+                          </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" onclick="saveEdit()">Update</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                    </div>
+                  </div>
+        </div>
+    </div>
+</main><!-- End #main -->
+</div>
+ 
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.15.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+    <!-- Include papaparse library for CSV parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+ 
+    <script src="bundle.js"></script>
+
+    <script>
+      // Check if the user is authenticated
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) {
+        // Redirect to the login page if not authenticated
+        window.location.href = "login.html";
+      }
+    </script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const addForm = document.getElementById('addForm');
+
+      // Add an event listener for the form submission
+      addForm.addEventListener('submit', function (e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Get form data
+        const loc = document.getElementById('loc').value;
+        const cases = document.getElementById('cases').value;
+        const deaths = document.getElementById('deaths').value;
+        const reportedAt = document.getElementById('reportedAt').value;
+        const region = document.getElementById('region').value;
+
+        // Validate form data (you can add more validation if needed)
+        if (!loc || !cases || !deaths || !reportedAt || !region) {
+          // Show an error alert if any field is empty
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'All fields are required!',
+          });
+          return;
+        }
+
+        // Simulate a successful submission (you should replace this with your actual submission logic)
+        // For demonstration purposes, always show the success alert
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: 'New Dengue Case added Successfully!',
+        });
+
+        // Reset the form after a successful submission
+        addForm.reset();
+      });
+    });
+  </script>
+
+  <!-- firebase js -->
+<script type="module">
+
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js';
+    import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js';
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      GoogleAuthProvider,
+      signInWithRedirect,
+      getRedirectResult,
+      signInWithPopup,
+      onAuthStateChanged
+    }
+      from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      connectFirestoreEmulator,
+      query,
+      getDocs,
+      getDoc,
+      updateDoc,
+      setDoc,
+      doc,
+      onSnapshot,
+      deleteDoc,
+      orderBy
+    } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js';
+  
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+  apiKey: "AIzaSyD8N5Yx1JeuhxA8chqk7GPD_lT3FwZZZBI",
+  authDomain: "data-storytelling-itd112-bd302.firebaseapp.com",
+  projectId: "data-storytelling-itd112-bd302",
+  storageBucket: "data-storytelling-itd112-bd302.appspot.com",
+  messagingSenderId: "697986110383",
+  appId: "1:697986110383:web:a2bbedf7a20c843266d55a",
+  measurementId: "G-K8PJFJTBEY"
+};
+  
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const auth = getAuth(app);
+  console.log(app);
+  
+  // Logout Button Click Event
+  document.addEventListener("DOMContentLoaded", function () {
+    const logoutBtn = document.getElementById("logoutBtn");
+    if (logoutBtn) {
+      logoutBtn.addEventListener("click", function () {
+        signOut(auth).then(() => {
+          // Sign-out successful.
+          localStorage.removeItem('user'); // Clear user data from localStorage
+          // Show success alert using SweetAlert
+          Swal.fire({
+            icon: 'success',
+            title: 'Logged Out Successfully',
+            text: 'Redirecting to Login page...',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true
+          }).then(() => {
+            // Redirect to the login page
+            window.location.href = "login.html";
+          });
+        }).catch((error) => {
+          // An error happened.
+          console.error('Logout Error:', error);
+        });
+      });
+    }
+  });
+  
+  //Firestore
+  const db = getFirestore();
+  
+  //Charts
+  firebase.initializeApp(firebaseConfig);
+  const db2 = firebase.firestore();
+  
+  // Function to generate a random color
+  function getRandomColor() {
+    return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+  }
+  
+  // Line chart
+  const ctxLine = document.getElementById('lineChart').getContext('2d');
+  let chartLine;
+  
+  db2.collection('dengue')
+    .orderBy('reportedAt', 'asc')
+    .onSnapshot((querySnapshot) => {
+      const dateCasesMap = new Map(); // Map to store cases aggregated by date
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const reportedAt = moment(data['reportedAt']).format('MM/DD/YYYY');
+        const cases = data['cases'];
+  
+        // Check if the date is already in the map
+        if (dateCasesMap.has(reportedAt)) {
+          // If yes, update the total cases for that date
+          dateCasesMap.set(reportedAt, dateCasesMap.get(reportedAt) + cases);
+        } else {
+          // If no, add a new entry in the map for that date
+          dateCasesMap.set(reportedAt, cases);
+        }
+      });
+  
+      const labels = [...dateCasesMap.keys()];
+      const casesData = [...dateCasesMap.values()];
+  
+      // Generate random colors for the legend
+      const randomColors = labels.map(() => {
+        const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+        return randomColor;
+      });
+  
+      const lineData = {
+        labels: labels,
+        datasets: [{
+          label: 'Number of Cases',
+          data: casesData,
+          fill: false,
+          borderColor: randomColors,
+          borderWidth: 2,
+          pointBackgroundColor: randomColors,
+          pointRadius: 5,
+          pointHoverRadius: 8,
+        }],
+      };
+  
+      if (chartLine) {
+        chartLine.destroy();
+      }
+  
+      chartLine = new Chart(ctxLine, {
+        type: 'line',
+        data: lineData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Cases over Time',
+              color: 'black',
+              font: {
+                size: 20,
+                family: 'Poppins',
+              },
+            },
+            legend: {
+              labels: {
+                color: 'black',
+                font: {
+                  size: 15,
+                  family: 'Poppins',
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+              title: {
+                display: true,
+                text: 'Date',
+                color: 'black',
+                font: {
+                  size: 12,
+                  family: 'Poppins',
+                },
+              },
+              ticks: {
+                color: 'black',
+                font: {
+                  size: 10,
+                  family: 'Poppins',
+                },
+              },
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.1)',
+              },
+              title: {
+                display: true,
+                text: 'Number of Cases',
+                color: 'black',
+                font: {
+                  size: 12,
+                  family: 'Poppins',
+                },
+              },
+              ticks: {
+                stepSize: 10,
+                color: 'black',
+                font: {
+                  size: 10,
+                  family: 'Poppins',
+                },
+              },
+            },
+          },
+        },
+      });
+    }, (error) => {
+      console.error("Error retrieving data from Firestore: ", error);
+    });
+  
+  
+  // Bar chart
+  const ctxBar = document.getElementById('barChart').getContext('2d');
+  let chartBar;
+  
+  db2.collection('dengue')
+    .onSnapshot((querySnapshot) => {
+      const regionCasesMap = new Map(); // Map to store cases aggregated by region
+      const regionColorsMap = new Map(); // Map to store random colors for each region
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const region = data['loc'];
+        const cases = data['cases'];
+  
+        // Check if the region is already in the map
+        if (regionCasesMap.has(region)) {
+          // If yes, update the total cases for that region
+          regionCasesMap.set(region, regionCasesMap.get(region) + cases);
+        } else {
+          // If no, add a new entry in the map for that region
+          regionCasesMap.set(region, cases);
+  
+          // Generate a random color for the legend for each unique region
+          const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+          regionColorsMap.set(region, randomColor);
+        }
+      });
+  
+      const labels = [...regionCasesMap.keys()];
+      const casesData = [...regionCasesMap.values()];
+  
+      // Get random colors for each region
+      const randomColors = labels.map((region) => regionColorsMap.get(region));
+  
+      const barData = {
+        labels: labels,
+        datasets: [{
+          label: 'Number of Cases',
+          data: casesData,
+          backgroundColor: randomColors,
+          borderColor: randomColors.map(color => color.replace('0.7', '1')), // Use the same colors for border
+          borderWidth: 1,
+        }],
+      };
+  
+      if (chartBar) {
+        chartBar.destroy();
+      }
+  
+      chartBar = new Chart(ctxBar, {
+        type: 'bar',
+        data: barData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Cases by Location',
+              color: 'black',
+              font: {
+                size: 20,
+                family: 'Poppins',
+              },
+            },
+            legend: {
+              display: true,
+              labels: {
+                color: 'black',
+                font: {
+                  size: 15,
+                  family: 'Poppins',
+                },
+              },
+            },
+          },
+          scales: {
+            x: {
+              grid: {
+                display: false,
+              },
+              title: {
+                display: true,
+                text: 'Location',
+                color: 'black',
+                font: {
+                  size: 12,
+                  family: 'Poppins',
+                },
+              },
+              ticks: {
+                color: 'black',
+                font: {
+                  size: 10,
+                  family: 'Poppins',
+                },
+              },
+            },
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'rgba(0, 0, 0, 0.1)',
+              },
+              title: {
+                display: true,
+                text: 'Number of Cases',
+                color: 'black',
+                font: {
+                  size: 12,
+                  family: 'Poppins',
+                },
+              },
+              ticks: {
+                stepSize: 1,
+                color: 'black',
+                font: {
+                  size: 10,
+                  family: 'Poppins',
+                },
+              },
+            },
+          },
+        },
+      });
+    }, (error) => {
+      console.error("Error retrieving data from Firestore: ", error);
+    });
+  
+  // Pie chart
+  const ctxPie = document.getElementById('pieChart').getContext('2d');
+  let chartPie;
+  
+  db2.collection('dengue')
+    .onSnapshot((querySnapshot) => {
+      const regionData = {};
+      const legendColors = [];
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const region = data['region'];
+        const cases = data['cases'];
+  
+        if (!regionData[region]) {
+          regionData[region] = 0;
+        }
+  
+        regionData[region] += cases;
+      });
+  
+      const labels = Object.keys(regionData);
+      const data = Object.values(regionData);
+  
+      // Generate random colors for the legend
+      for (let i = 0; i < labels.length; i++) {
+        const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.7)`;
+        legendColors.push(randomColor);
+      }
+  
+      const pieData = {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: legendColors,
+        }],
+      };
+  
+      if (chartPie) {
+        chartPie.destroy();
+      }
+  
+      chartPie = new Chart(ctxPie, {
+        type: 'pie',
+        data: pieData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Cases by Region',
+              color: 'black',
+              font: {
+                size: 20,
+                family: 'Poppins'
+              }
+            },
+           // legend: {
+            //  labels: {
+            //    color: 'black',
+            //    font: {
+           //       size: 15,
+           //       family: 'Poppins'
+            //    }
+             // }
+            //}
+          },
+        }
+      });
+    }, (error) => {
+      console.error("Error retrieving data from Firestore: ", error);
+    });
+  
+  // Doughnut chart
+  const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+  let chartDoughnut;
+  
+  db2.collection('dengue')
+    .onSnapshot((querySnapshot) => {
+      const regionDeathsMap = new Map(); // Map to store deaths aggregated by region
+      const regionColorsMap = new Map(); // Map to store random colors for each region
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const region = data['region'];
+        const deaths = data['deaths'];
+  
+        // Check if the region is already in the map
+        if (regionDeathsMap.has(region)) {
+          // If yes, update the total deaths for that region
+          regionDeathsMap.set(region, regionDeathsMap.get(region) + deaths);
+        } else {
+          // If no, add a new entry in the map for that region
+          regionDeathsMap.set(region, deaths);
+  
+          // Generate a random color for the legend for each unique region
+          const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+          regionColorsMap.set(region, randomColor);
+        }
+      });
+  
+      const labels = [...regionDeathsMap.keys()];
+      const deathsData = [...regionDeathsMap.values()];
+  
+      // Get random colors for each region
+      const randomColors = labels.map((region) => regionColorsMap.get(region));
+  
+      const doughnutData = {
+        labels: labels,
+        datasets: [{
+          data: deathsData,
+          backgroundColor: randomColors,
+          borderColor: randomColors.map(color => color.replace('0.7', '1')), // Use the same colors for border
+          borderWidth: 1,
+        }],
+      };
+  
+      if (chartDoughnut) {
+        chartDoughnut.destroy();
+      }
+  
+      chartDoughnut = new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: doughnutData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Deaths by Region',
+              color: 'black',
+              font: {
+                size: 20,
+                family: 'Poppins',
+              },
+            },
+          },
+        },
+      });
+    }, (error) => {
+      console.error("Error retrieving data from Firestore: ", error);
+    });
+  
+  
+  // Radar chart
+  const ctxRadar = document.getElementById('radarChart').getContext('2d');
+  let chartRadar;
+  
+  db2.collection('dengue')
+    .onSnapshot((querySnapshot) => {
+      const locationSet = new Set();
+      const casesData = [];
+      const deathsData = [];
+      const legendColors = [getRandomColor(), getRandomColor()]; // Random colors for each dataset
+  
+      querySnapshot.forEach((doc) => {
+        const dengueData = doc.data();
+        const location = dengueData['loc'];
+  
+        if (!locationSet.has(location)) {
+          locationSet.add(location);
+          casesData.push(dengueData['cases']);
+          deathsData.push(dengueData['deaths']);
+        }
+      });
+  
+      const radarData = {
+        labels: Array.from(locationSet),
+        datasets: [{
+          label: 'Cases',
+          data: casesData,
+          backgroundColor: legendColors[0],
+          borderColor: legendColors[0].replace('0.7', '1'), // Use the same color for border
+          borderWidth: 2,
+          pointBackgroundColor: legendColors[0],
+          pointRadius: 5,
+          pointHoverRadius: 8,
+        },
+        {
+          label: 'Deaths',
+          data: deathsData,
+          backgroundColor: legendColors[1],
+          borderColor: legendColors[1].replace('0.7', '1'), // Use the same color for border
+          borderWidth: 2,
+          pointBackgroundColor: legendColors[1],
+          pointRadius: 5,
+          pointHoverRadius: 8,
+        }],
+      };
+  
+      if (chartRadar) {
+        chartRadar.destroy();
+      }
+  
+      chartRadar = new Chart(ctxRadar, {
+        type: 'radar',
+        data: radarData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Cases and Deaths by Location',
+              color: 'black',
+              font: {
+                size: 20,
+                family: 'Poppins',
+              },
+            },
+            legend: {
+              labels: {
+                color: 'black',
+                font: {
+                  size: 15,
+                  family: 'Poppins',
+                },
+              },
+            },
+          },
+        },
+      });
+    }, (error) => {
+      console.error("Error retrieving data from Firestore: ", error);
+    });
+  
+  // Polar Area chart
+    const ctxPolarArea = document.getElementById('polarAreaChart').getContext('2d');
+    let chartPolarArea;
+    
+    db2.collection('dengue')
+      .onSnapshot((querySnapshot) => {
+        const regionDeathsMap = new Map(); // Map to store deaths aggregated by region
+        const regionColorsMap = new Map(); // Map to store random colors for each region
+    
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const region = data['region'];
+          const deaths = data['deaths'];
+    
+          // Check if the region is already in the map
+          if (regionDeathsMap.has(region)) {
+            // If yes, update the total deaths for that region
+            regionDeathsMap.set(region, regionDeathsMap.get(region) + deaths);
+          } else {
+            // If no, add a new entry in the map for that region
+            regionDeathsMap.set(region, deaths);
+    
+            // Generate a random color for the legend for each unique region
+            const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+            regionColorsMap.set(region, randomColor);
+          }
+        });
+    
+        const labels = [...regionDeathsMap.keys()];
+        const deathsData = [...regionDeathsMap.values()];
+    
+        // Get random colors for each region
+        const randomColors = labels.map((region) => regionColorsMap.get(region));
+    
+        const polarAreaData = {
+          labels: labels,
+          datasets: [{
+            data: deathsData,
+            backgroundColor: randomColors,
+            borderColor: randomColors.map(color => color.replace('0.7', '1')), // Use the same colors for border
+            borderWidth: 1,
+          }],
+        };
+    
+        if (chartPolarArea) {
+          chartPolarArea.destroy();
+        }
+    
+        chartPolarArea = new Chart(ctxPolarArea, {
+          type: 'polarArea',
+          data: polarAreaData,
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+              duration: 1000,
+              easing: 'easeOutBounce',
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: 'Deaths by Region',
+                color: 'black',
+                font: {
+                  size: 20,
+                  family: 'Poppins',
+                },
+              },
+              //legend: {
+              //  display: true,
+              //  labels: {
+              //    color: 'black',
+               //   font: {
+               //     size: 15,
+               //     family: 'Poppins',
+              //    },
+               // },
+              //},
+            },
+          },
+        });
+      }, (error) => {
+        console.error("Error retrieving data from Firestore: ", error);
+      });
+    
+  // Stacked Bar chart 
+      const ctxStackedBar = document.getElementById('stackedBarChart').getContext('2d');
+      let chartStackedBar;
+      
+      db2.collection('dengue')
+        .onSnapshot((querySnapshot) => {
+          const regionData = {};
+          const legendColors = ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)']; // Colors for deaths and cases
+      
+          querySnapshot.forEach((doc) => {
+            const data = doc.data();
+            const region = data['region'];
+            const cases = data['cases'];
+            const deaths = data['deaths'];
+      
+            if (!regionData[region]) {
+              regionData[region] = { cases: 0, deaths: 0 };
+            }
+      
+            regionData[region].cases += cases;
+            regionData[region].deaths += deaths;
+          });
+      
+          const labels = Object.keys(regionData);
+          const datasets = [{
+            label: 'Cases',
+            data: labels.map(region => regionData[region].cases),
+            backgroundColor: legendColors[0],
+          }, {
+            label: 'Deaths',
+            data: labels.map(region => regionData[region].deaths),
+            backgroundColor: legendColors[1],
+          }];
+      
+          if (chartStackedBar) {
+            chartStackedBar.destroy();
+          }
+      
+          chartStackedBar = new Chart(ctxStackedBar, {
+            type: 'bar',
+            data: {
+              labels: labels,
+              datasets: datasets,
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              animation: {
+                duration: 1000,
+                easing: 'easeOutBounce',
+              },
+              plugins: {
+                title: {
+                  display: true,
+                  text: 'Cases and Deaths by Region',
+                  color: 'black',
+                  font: {
+                    size: 20,
+                    family: 'Poppins',
+                  },
+                },
+                legend: {
+                  display: true,
+                  labels: {
+                    color: 'black',
+                    font: {
+                      size: 15,
+                      family: 'Poppins',
+                    },
+                  },
+                },
+              },
+              scales: {
+                x: {
+                  stacked: true,
+                  grid: {
+                    display: false,
+                  },
+                  title: {
+                    display: true,
+                    text: 'Region',
+                    color: 'black',
+                    font: {
+                      size: 12,
+                      family: 'Poppins',
+                    },
+                  },
+                  ticks: {
+                    color: 'black',
+                    font: {
+                      size: 10,
+                      family: 'Poppins',
+                    },
+                  },
+                },
+                y: {
+                  stacked: true,
+                  beginAtZero: true,
+                  grid: {
+                    color: 'rgba(0, 0, 0, 0.1)',
+                  },
+                  title: {
+                    display: true,
+                    text: 'Number of Cases/Deaths',
+                    color: 'black',
+                    font: {
+                      size: 12,
+                      family: 'Poppins',
+                    },
+                  },
+                  ticks: {
+                    stepSize: 1,
+                    color: 'black',
+                    font: {
+                      size: 10,
+                      family: 'Poppins',
+                    },
+                  },
+                },
+              },
+            },
+          });
+        }, (error) => {
+          console.error("Error retrieving data from Firestore: ", error);
+        });
+      
+  
+    // Bubble chart
+    const ctxBubble = document.getElementById('bubbleChart').getContext('2d');
+    let chartBubble;
+  
+    db.collection('dengue')
+      .orderBy('reportedAt', 'asc')
+      .onSnapshot((querySnapshot) => {
+        const bubbleData = [];
+  
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const location = data['loc'];
+          const cases = data['cases'];
+          const deaths = data['deaths'];
+          const reportedAt = moment(data['reportedAt']).format('MM/DD/YYYY');
+  
+          bubbleData.push({
+            label: location,
+            x: reportedAt,
+            y: deaths,
+            r: cases, 
+          });
+        });
+  
+        const bubbleDataset = {
+          data: bubbleData,
+          backgroundColor: 'rgba(75, 192, 192, 0.7)',
+          borderColor: 'rgba(75, 192, 192, 1)', 
+          borderWidth: 1,
+        };
+  
+        if (chartBubble) {
+          chartBubble.destroy();
+        }
+  
+        chartBubble = new Chart(ctxBubble, {
+          type: 'bubble',
+          data: {
+            datasets: [bubbleDataset],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+              duration: 1000,
+              easing: 'easeOutBounce',
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: 'Cases and Deaths by Location',
+                color: 'black',
+                font: {
+                  size: 20,
+                  family: 'Poppins',
+                },
+              },
+            },
+            scales: {
+              x: {
+                title: {
+                  display: true,
+                  text: 'Reported At',
+                  color: 'black',
+                  font: {
+                    size: 12,
+                    family: 'Poppins',
+                  },
+                },
+              },
+              y: {
+                title: {
+                  display: true,
+                  text: 'Deaths',
+                  color: 'black',
+                  font: {
+                    size: 12,
+                    family: 'Poppins',
+                  },
+                },
+              },
+            },
+          },
+        });
+      }, (error) => {
+        console.error("Error retrieving data from Firestore: ", error);
+      });
+  </script>
+  
+<script>
+   // Function to update the dashboard display
+  function updateDashboard(data) {
+    const dashboardTableBody = document.getElementById('dashboardTableBody');
+    dashboardTableBody.innerHTML = ''; // Clear previous content
+
+    data.forEach((caseData) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${caseData.loc}</td>
+        <td>${caseData.cases}</td>
+        <td>${caseData.deaths}</td>
+        <td>${caseData.reportedAt}</td>
+        <td>${caseData.region}</td>
+        <td>
+          <button type="button" class="btn btn-warning" onclick="openEditModal('${caseData.id}', '${caseData.loc}', ${caseData.cases}, ${caseData.deaths}, '${caseData.reportedAt}', '${caseData.region}')">
+            <i class="bi bi-pencil"></i> <!-- Pencil icon for edit -->
+          </button>
+          <button type="button" class="btn btn-danger" onclick="deleteCase('${caseData.id}')">
+            <i class="bi bi-trash"></i> <!-- Trash icon for delete -->
+          </button>
+        </td>
+      `;
+      dashboardTableBody.appendChild(row);
+    });
+
+    // Initialize DataTable after updating the content
+    $('#dashboardTable').DataTable();
+  }
+
+    // Function to open the Edit modal and pre-fill data
+    function openEditModal(id, loc, cases, deaths, reportedAt, region) {
+      // Set the values of the input fields in the modal
+      document.getElementById('editId').value = id;
+      document.getElementById('editLoc').value = loc;
+      document.getElementById('editCases').value = cases;
+      document.getElementById('editDeaths').value = deaths;
+      document.getElementById('editReportedAt').value = reportedAt;
+      document.getElementById('editRegion').value = region;
+  
+      // Show the Edit modal
+      const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+      editModal.show();
+    }
+
+    async function saveEdit() {
+      const editId = document.getElementById('editId').value;
+      const editLoc = document.getElementById('editLoc').value;
+      const editCases = parseInt(document.getElementById('editCases').value);
+      const editDeaths = parseInt(document.getElementById('editDeaths').value);
+      const editReportedAt = document.getElementById('editReportedAt').value;
+      const editRegion = document.getElementById('editRegion').value;
+  
+      try {
+        // Update the document in Firestore
+        await updateDoc(doc(colRef, editId), {
+          loc: editLoc,
+          cases: editCases,
+          deaths: editDeaths,
+          reportedAt: editReportedAt,
+          region: editRegion,
+        });
+  
+        // Close the modal
+        const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        editModal.hide();
+      } catch (error) {
+        console.error('Error updating document: ', error);
+      }
+    }
+  
+    // Add a listener for the form submission
+    const editCaseForm = document.getElementById('editCaseForm');
+    editCaseForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      saveEdit();
+    });
+  </script>
+
+<!-- Bootstrap Icons CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.15.0/font/bootstrap-icons.css" rel="stylesheet">
+<script src="static/script.js"></script>
+</body>
+</html>

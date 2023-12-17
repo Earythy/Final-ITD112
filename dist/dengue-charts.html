@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Charts / Dengue</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- ===== Iconscout CSS ===== -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="assets/css/signin.css">
+    
+  <script src="https://kit.fontawesome.com/334c45a40c.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">Data Visualization</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              You have 4 new notifications
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <h4>Lorem Ipsum</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>30 min. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-x-circle text-danger"></i>
+              <div>
+                <h4>Atque rerum nesciunt</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>1 hr. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-check-circle text-success"></i>
+              <div>
+                <h4>Sit rerum fuga</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>2 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>Dicta reprehenderit</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Show all notifications</a>
+            </li>
+
+          </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a><!-- End Messages Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              You have 3 new messages
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Maria Hudson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>4 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Anna Nelson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>6 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>David Muldon</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>8 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="dropdown-footer">
+              <a href="#">Show all messages</a>
+            </li>
+
+          </ul><!-- End Messages Dropdown Items -->
+
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Admin</h6>
+              <span>Web Developer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+                <a class="dropdown-item d-flex align-items-center" id="logoutBtn">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Log Out</span>
+                </a>
+              </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+ <!-- ======= Sidebar ======= -->
+ <aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="dashboard.html">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="dengue-form.html">
+            <i class="bi bi-circle"></i><span>Dengue Form</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+              <a href="dengue-table.html">
+                <i class="bi bi-circle"></i><span>Dengue Table</span>
+              </a>
+            </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="charts-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+              <a href="dengue-charts.html" class="active">
+                <i class="bi bi-circle"></i><span>Dengue Charts</span>
+              </a>
+            </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="read-csv.html">
+        <i class="bi bi-file-earmark-spreadsheet"></i>
+        <span>Read CSV/Exceel</span>
+      </a>
+    </li>
+
+    <li class="nav-heading">Pages</li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="users-profile.html">
+        <i class="bi bi-person"></i>
+        <span>Profile</span>
+      </a>
+    </li><!-- End Profile Page Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="pages-faq.html">
+        <i class="bi bi-question-circle"></i>
+        <span>F.A.Q</span>
+      </a>
+    </li><!-- End F.A.Q Page Nav -->
+
+  </ul>
+
+</aside><!-- End Sidebar-->
+
+
+<!-- ======= Main ======= -->
+  <main id="main" class="main">
+
+      <div class="pagetitle">
+        <h1>Dengue Charts</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+            <li class="breadcrumb-item">Charts</li>
+            <li class="breadcrumb-item active">Dengue</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
+  
+      <section class="section">
+        <div class="row">
+  
+          <div class="col-lg-6">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Line Chart</h5>
+                <!-- Line Chart -->
+                <canvas id="lineChart" style="max-height: 400px;"></canvas>
+                <!-- End Line CHart -->
+              </div>
+            </div>
+          </div>
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Bar Chart</h5>
+    
+                  <!-- Bar Chart -->
+                  <canvas id="barChart" style="max-height: 400px;"></canvas>
+                  <!-- End Bar CHart -->
+    
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Pie Chart</h5>
+                  <!-- Pie Chart -->
+                  <canvas id="pieChart" style="max-height: 400px;"></canvas>
+                  <!-- End Pie CHart -->
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Doughnut Chart</h5>
+    
+                  <!-- Doughnut Chart -->
+                  <canvas id="doughnutChart" style="max-height: 400px;"></canvas>
+                  <!-- End Doughnut CHart -->
+    
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Radar Chart</h5>
+    
+                  <!-- Radar Chart -->
+                  <canvas id="radarChart" style="max-height: 400px;"></canvas>
+                  <!-- End Radar CHart -->
+    
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Polar Area Chart</h5>
+    
+                  <!-- Polar Area Chart -->
+                  <canvas id="polarAreaChart" style="max-height: 400px;"></canvas>
+
+                  <!-- End Polar Area Chart -->
+    
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Stacked Bar Chart</h5>
+    
+                  <!-- Stacked Bar Chart -->
+                  <canvas id="stackedBarChart" style="max-height: 400px;"></canvas>
+                  <!-- End Stacked Bar Chart -->
+    
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-lg-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Bubble Chart</h5>
+    
+                  <!-- Bubble Chart -->
+                  <canvas id="bubbleChart" style="max-height: 400px;"></canvas>  
+                  <!-- End Bubble Chart -->
+    
+                </div>
+              </div>
+            </div>
+    
+          </div>
+        </section>
+    
+      </main><!-- End #main -->
+
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+ <!-- Vendor JS Files -->
+<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/vendor/chart.js/chart.umd.js"></script>
+<script src="assets/vendor/echarts/echarts.min.js"></script>
+<script src="assets/vendor/quill/quill.min.js"></script>
+<script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="assets/vendor/php-email-form/validate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+ <!-- Template Main JS File -->
+ <script src="assets/js/main.js"></script>
+
+ <script src="bundle.js"></script>
+
+<script>
+    // Check if the user is authenticated
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      // Redirect to the login page if not authenticated
+      window.location.href = "login.html";
+    }
+</script>
+
+<!-- firebase js -->
+<script type="module">
+
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js';
+  import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js';
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    GoogleAuthProvider,
+    signInWithRedirect,
+    getRedirectResult,
+    signInWithPopup,
+    onAuthStateChanged
+  }
+    from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    connectFirestoreEmulator,
+    query,
+    getDocs,
+    getDoc,
+    updateDoc,
+    setDoc,
+    doc,
+    onSnapshot,
+    deleteDoc,
+    orderBy
+  } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js';
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyD8N5Yx1JeuhxA8chqk7GPD_lT3FwZZZBI",
+  authDomain: "data-storytelling-itd112-bd302.firebaseapp.com",
+  projectId: "data-storytelling-itd112-bd302",
+  storageBucket: "data-storytelling-itd112-bd302.appspot.com",
+  messagingSenderId: "697986110383",
+  appId: "1:697986110383:web:a2bbedf7a20c843266d55a",
+  measurementId: "G-K8PJFJTBEY"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app);
+console.log(app);
+
+// Logout Button Click Event
+document.addEventListener("DOMContentLoaded", function () {
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", function () {
+      signOut(auth).then(() => {
+        // Sign-out successful.
+        localStorage.removeItem('user'); // Clear user data from localStorage
+        // Show success alert using SweetAlert
+        Swal.fire({
+          icon: 'success',
+          title: 'Logged Out Successfully',
+          text: 'Redirecting to Login page...',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true
+        }).then(() => {
+          // Redirect to the login page
+          window.location.href = "login.html";
+        });
+      }).catch((error) => {
+        // An error happened.
+        console.error('Logout Error:', error);
+      });
+    });
+  }
+});
+
+//Firestore
+const db = getFirestore();
+
+//Charts
+firebase.initializeApp(firebaseConfig);
+const db2 = firebase.firestore();
+
+// Function to generate a random color
+function getRandomColor() {
+  return `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+}
+
+// Line chart
+const ctxLine = document.getElementById('lineChart').getContext('2d');
+let chartLine;
+
+db2.collection('dengue')
+  .orderBy('reportedAt', 'asc')
+  .onSnapshot((querySnapshot) => {
+    const dateCasesMap = new Map(); // Map to store cases aggregated by date
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const reportedAt = moment(data['reportedAt']).format('MM/DD/YYYY');
+      const cases = data['cases'];
+
+      // Check if the date is already in the map
+      if (dateCasesMap.has(reportedAt)) {
+        // If yes, update the total cases for that date
+        dateCasesMap.set(reportedAt, dateCasesMap.get(reportedAt) + cases);
+      } else {
+        // If no, add a new entry in the map for that date
+        dateCasesMap.set(reportedAt, cases);
+      }
+    });
+
+    const labels = [...dateCasesMap.keys()];
+    const casesData = [...dateCasesMap.values()];
+
+    // Generate random colors for the legend
+    const randomColors = labels.map(() => {
+      const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+      return randomColor;
+    });
+
+    const lineData = {
+      labels: labels,
+      datasets: [{
+        label: 'Number of Cases',
+        data: casesData,
+        fill: false,
+        borderColor: randomColors,
+        borderWidth: 2,
+        pointBackgroundColor: randomColors,
+        pointRadius: 5,
+        pointHoverRadius: 8,
+      }],
+    };
+
+    if (chartLine) {
+      chartLine.destroy();
+    }
+
+    chartLine = new Chart(ctxLine, {
+      type: 'line',
+      data: lineData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce',
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Cases over Time',
+            color: 'black',
+            font: {
+              size: 20,
+              family: 'Poppins',
+            },
+          },
+          legend: {
+            labels: {
+              color: 'black',
+              font: {
+                size: 15,
+                family: 'Poppins',
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: 'Date',
+              color: 'black',
+              font: {
+                size: 12,
+                family: 'Poppins',
+              },
+            },
+            ticks: {
+              color: 'black',
+              font: {
+                size: 10,
+                family: 'Poppins',
+              },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)',
+            },
+            title: {
+              display: true,
+              text: 'Number of Cases',
+              color: 'black',
+              font: {
+                size: 12,
+                family: 'Poppins',
+              },
+            },
+            ticks: {
+              stepSize: 10,
+              color: 'black',
+              font: {
+                size: 10,
+                family: 'Poppins',
+              },
+            },
+          },
+        },
+      },
+    });
+  }, (error) => {
+    console.error("Error retrieving data from Firestore: ", error);
+  });
+
+
+// Bar chart
+const ctxBar = document.getElementById('barChart').getContext('2d');
+let chartBar;
+
+db2.collection('dengue')
+  .onSnapshot((querySnapshot) => {
+    const regionCasesMap = new Map(); // Map to store cases aggregated by region
+    const regionColorsMap = new Map(); // Map to store random colors for each region
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const region = data['loc'];
+      const cases = data['cases'];
+
+      // Check if the region is already in the map
+      if (regionCasesMap.has(region)) {
+        // If yes, update the total cases for that region
+        regionCasesMap.set(region, regionCasesMap.get(region) + cases);
+      } else {
+        // If no, add a new entry in the map for that region
+        regionCasesMap.set(region, cases);
+
+        // Generate a random color for the legend for each unique region
+        const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+        regionColorsMap.set(region, randomColor);
+      }
+    });
+
+    const labels = [...regionCasesMap.keys()];
+    const casesData = [...regionCasesMap.values()];
+
+    // Get random colors for each region
+    const randomColors = labels.map((region) => regionColorsMap.get(region));
+
+    const barData = {
+      labels: labels,
+      datasets: [{
+        label: 'Number of Cases',
+        data: casesData,
+        backgroundColor: randomColors,
+        borderColor: randomColors.map(color => color.replace('0.7', '1')), // Use the same colors for border
+        borderWidth: 1,
+      }],
+    };
+
+    if (chartBar) {
+      chartBar.destroy();
+    }
+
+    chartBar = new Chart(ctxBar, {
+      type: 'bar',
+      data: barData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce',
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Cases by Location',
+            color: 'black',
+            font: {
+              size: 20,
+              family: 'Poppins',
+            },
+          },
+          legend: {
+            display: true,
+            labels: {
+              color: 'black',
+              font: {
+                size: 15,
+                family: 'Poppins',
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: {
+              display: false,
+            },
+            title: {
+              display: true,
+              text: 'Location',
+              color: 'black',
+              font: {
+                size: 12,
+                family: 'Poppins',
+              },
+            },
+            ticks: {
+              color: 'black',
+              font: {
+                size: 10,
+                family: 'Poppins',
+              },
+            },
+          },
+          y: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(0, 0, 0, 0.1)',
+            },
+            title: {
+              display: true,
+              text: 'Number of Cases',
+              color: 'black',
+              font: {
+                size: 12,
+                family: 'Poppins',
+              },
+            },
+            ticks: {
+              stepSize: 1,
+              color: 'black',
+              font: {
+                size: 10,
+                family: 'Poppins',
+              },
+            },
+          },
+        },
+      },
+    });
+  }, (error) => {
+    console.error("Error retrieving data from Firestore: ", error);
+  });
+
+// Pie chart
+const ctxPie = document.getElementById('pieChart').getContext('2d');
+let chartPie;
+
+db2.collection('dengue')
+  .onSnapshot((querySnapshot) => {
+    const regionData = {};
+    const legendColors = [];
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const region = data['region'];
+      const cases = data['cases'];
+
+      if (!regionData[region]) {
+        regionData[region] = 0;
+      }
+
+      regionData[region] += cases;
+    });
+
+    const labels = Object.keys(regionData);
+    const data = Object.values(regionData);
+
+    // Generate random colors for the legend
+    for (let i = 0; i < labels.length; i++) {
+      const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 0.7)`;
+      legendColors.push(randomColor);
+    }
+
+    const pieData = {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: legendColors,
+      }],
+    };
+
+    if (chartPie) {
+      chartPie.destroy();
+    }
+
+    chartPie = new Chart(ctxPie, {
+      type: 'pie',
+      data: pieData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce',
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Cases by Region',
+            color: 'black',
+            font: {
+              size: 20,
+              family: 'Poppins'
+            }
+          },
+         // legend: {
+          //  labels: {
+          //    color: 'black',
+          //    font: {
+         //       size: 15,
+         //       family: 'Poppins'
+          //    }
+           // }
+          //}
+        },
+      }
+    });
+  }, (error) => {
+    console.error("Error retrieving data from Firestore: ", error);
+  });
+
+// Doughnut chart
+const ctxDoughnut = document.getElementById('doughnutChart').getContext('2d');
+let chartDoughnut;
+
+db2.collection('dengue')
+  .onSnapshot((querySnapshot) => {
+    const regionDeathsMap = new Map(); // Map to store deaths aggregated by region
+    const regionColorsMap = new Map(); // Map to store random colors for each region
+
+    querySnapshot.forEach((doc) => {
+      const data = doc.data();
+      const region = data['region'];
+      const deaths = data['deaths'];
+
+      // Check if the region is already in the map
+      if (regionDeathsMap.has(region)) {
+        // If yes, update the total deaths for that region
+        regionDeathsMap.set(region, regionDeathsMap.get(region) + deaths);
+      } else {
+        // If no, add a new entry in the map for that region
+        regionDeathsMap.set(region, deaths);
+
+        // Generate a random color for the legend for each unique region
+        const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+        regionColorsMap.set(region, randomColor);
+      }
+    });
+
+    const labels = [...regionDeathsMap.keys()];
+    const deathsData = [...regionDeathsMap.values()];
+
+    // Get random colors for each region
+    const randomColors = labels.map((region) => regionColorsMap.get(region));
+
+    const doughnutData = {
+      labels: labels,
+      datasets: [{
+        data: deathsData,
+        backgroundColor: randomColors,
+        borderColor: randomColors.map(color => color.replace('0.7', '1')), // Use the same colors for border
+        borderWidth: 1,
+      }],
+    };
+
+    if (chartDoughnut) {
+      chartDoughnut.destroy();
+    }
+
+    chartDoughnut = new Chart(ctxDoughnut, {
+      type: 'doughnut',
+      data: doughnutData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce',
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Deaths by Region',
+            color: 'black',
+            font: {
+              size: 20,
+              family: 'Poppins',
+            },
+          },
+        },
+      },
+    });
+  }, (error) => {
+    console.error("Error retrieving data from Firestore: ", error);
+  });
+
+
+// Radar chart
+const ctxRadar = document.getElementById('radarChart').getContext('2d');
+let chartRadar;
+
+db2.collection('dengue')
+  .onSnapshot((querySnapshot) => {
+    const locationSet = new Set();
+    const casesData = [];
+    const deathsData = [];
+    const legendColors = [getRandomColor(), getRandomColor()]; // Random colors for each dataset
+
+    querySnapshot.forEach((doc) => {
+      const dengueData = doc.data();
+      const location = dengueData['loc'];
+
+      if (!locationSet.has(location)) {
+        locationSet.add(location);
+        casesData.push(dengueData['cases']);
+        deathsData.push(dengueData['deaths']);
+      }
+    });
+
+    const radarData = {
+      labels: Array.from(locationSet),
+      datasets: [{
+        label: 'Cases',
+        data: casesData,
+        backgroundColor: legendColors[0],
+        borderColor: legendColors[0].replace('0.7', '1'), // Use the same color for border
+        borderWidth: 2,
+        pointBackgroundColor: legendColors[0],
+        pointRadius: 5,
+        pointHoverRadius: 8,
+      },
+      {
+        label: 'Deaths',
+        data: deathsData,
+        backgroundColor: legendColors[1],
+        borderColor: legendColors[1].replace('0.7', '1'), // Use the same color for border
+        borderWidth: 2,
+        pointBackgroundColor: legendColors[1],
+        pointRadius: 5,
+        pointHoverRadius: 8,
+      }],
+    };
+
+    if (chartRadar) {
+      chartRadar.destroy();
+    }
+
+    chartRadar = new Chart(ctxRadar, {
+      type: 'radar',
+      data: radarData,
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: {
+          duration: 1000,
+          easing: 'easeOutBounce',
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: 'Cases and Deaths by Location',
+            color: 'black',
+            font: {
+              size: 20,
+              family: 'Poppins',
+            },
+          },
+          legend: {
+            labels: {
+              color: 'black',
+              font: {
+                size: 15,
+                family: 'Poppins',
+              },
+            },
+          },
+        },
+      },
+    });
+  }, (error) => {
+    console.error("Error retrieving data from Firestore: ", error);
+  });
+
+// Polar Area chart
+  const ctxPolarArea = document.getElementById('polarAreaChart').getContext('2d');
+  let chartPolarArea;
+  
+  db2.collection('dengue')
+    .onSnapshot((querySnapshot) => {
+      const regionDeathsMap = new Map(); // Map to store deaths aggregated by region
+      const regionColorsMap = new Map(); // Map to store random colors for each region
+  
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const region = data['region'];
+        const deaths = data['deaths'];
+  
+        // Check if the region is already in the map
+        if (regionDeathsMap.has(region)) {
+          // If yes, update the total deaths for that region
+          regionDeathsMap.set(region, regionDeathsMap.get(region) + deaths);
+        } else {
+          // If no, add a new entry in the map for that region
+          regionDeathsMap.set(region, deaths);
+  
+          // Generate a random color for the legend for each unique region
+          const randomColor = `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, 1)`;
+          regionColorsMap.set(region, randomColor);
+        }
+      });
+  
+      const labels = [...regionDeathsMap.keys()];
+      const deathsData = [...regionDeathsMap.values()];
+  
+      // Get random colors for each region
+      const randomColors = labels.map((region) => regionColorsMap.get(region));
+  
+      const polarAreaData = {
+        labels: labels,
+        datasets: [{
+          data: deathsData,
+          backgroundColor: randomColors,
+          borderColor: randomColors.map(color => color.replace('0.7', '1')), // Use the same colors for border
+          borderWidth: 1,
+        }],
+      };
+  
+      if (chartPolarArea) {
+        chartPolarArea.destroy();
+      }
+  
+      chartPolarArea = new Chart(ctxPolarArea, {
+        type: 'polarArea',
+        data: polarAreaData,
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Deaths by Region',
+              color: 'black',
+              font: {
+                size: 20,
+                family: 'Poppins',
+              },
+            },
+            //legend: {
+            //  display: true,
+            //  labels: {
+            //    color: 'black',
+             //   font: {
+             //     size: 15,
+             //     family: 'Poppins',
+            //    },
+             // },
+            //},
+          },
+        },
+      });
+    }, (error) => {
+      console.error("Error retrieving data from Firestore: ", error);
+    });
+  
+// Stacked Bar chart 
+    const ctxStackedBar = document.getElementById('stackedBarChart').getContext('2d');
+    let chartStackedBar;
+    
+    db2.collection('dengue')
+      .onSnapshot((querySnapshot) => {
+        const regionData = {};
+        const legendColors = ['rgba(255, 99, 132, 0.7)', 'rgba(54, 162, 235, 0.7)']; // Colors for deaths and cases
+    
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          const region = data['region'];
+          const cases = data['cases'];
+          const deaths = data['deaths'];
+    
+          if (!regionData[region]) {
+            regionData[region] = { cases: 0, deaths: 0 };
+          }
+    
+          regionData[region].cases += cases;
+          regionData[region].deaths += deaths;
+        });
+    
+        const labels = Object.keys(regionData);
+        const datasets = [{
+          label: 'Cases',
+          data: labels.map(region => regionData[region].cases),
+          backgroundColor: legendColors[0],
+        }, {
+          label: 'Deaths',
+          data: labels.map(region => regionData[region].deaths),
+          backgroundColor: legendColors[1],
+        }];
+    
+        if (chartStackedBar) {
+          chartStackedBar.destroy();
+        }
+    
+        chartStackedBar = new Chart(ctxStackedBar, {
+          type: 'bar',
+          data: {
+            labels: labels,
+            datasets: datasets,
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            animation: {
+              duration: 1000,
+              easing: 'easeOutBounce',
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: 'Cases and Deaths by Region',
+                color: 'black',
+                font: {
+                  size: 20,
+                  family: 'Poppins',
+                },
+              },
+              legend: {
+                display: true,
+                labels: {
+                  color: 'black',
+                  font: {
+                    size: 15,
+                    family: 'Poppins',
+                  },
+                },
+              },
+            },
+            scales: {
+              x: {
+                stacked: true,
+                grid: {
+                  display: false,
+                },
+                title: {
+                  display: true,
+                  text: 'Region',
+                  color: 'black',
+                  font: {
+                    size: 12,
+                    family: 'Poppins',
+                  },
+                },
+                ticks: {
+                  color: 'black',
+                  font: {
+                    size: 10,
+                    family: 'Poppins',
+                  },
+                },
+              },
+              y: {
+                stacked: true,
+                beginAtZero: true,
+                grid: {
+                  color: 'rgba(0, 0, 0, 0.1)',
+                },
+                title: {
+                  display: true,
+                  text: 'Number of Cases/Deaths',
+                  color: 'black',
+                  font: {
+                    size: 12,
+                    family: 'Poppins',
+                  },
+                },
+                ticks: {
+                  stepSize: 1,
+                  color: 'black',
+                  font: {
+                    size: 10,
+                    family: 'Poppins',
+                  },
+                },
+              },
+            },
+          },
+        });
+      }, (error) => {
+        console.error("Error retrieving data from Firestore: ", error);
+      });
+    
+
+  // Bubble chart
+  const ctxBubble = document.getElementById('bubbleChart').getContext('2d');
+  let chartBubble;
+
+  db.collection('dengue')
+    .orderBy('reportedAt', 'asc')
+    .onSnapshot((querySnapshot) => {
+      const bubbleData = [];
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const location = data['loc'];
+        const cases = data['cases'];
+        const deaths = data['deaths'];
+        const reportedAt = moment(data['reportedAt']).format('MM/DD/YYYY');
+
+        bubbleData.push({
+          label: location,
+          x: reportedAt,
+          y: deaths,
+          r: cases, 
+        });
+      });
+
+      const bubbleDataset = {
+        data: bubbleData,
+        backgroundColor: 'rgba(75, 192, 192, 0.7)',
+        borderColor: 'rgba(75, 192, 192, 1)', 
+        borderWidth: 1,
+      };
+
+      if (chartBubble) {
+        chartBubble.destroy();
+      }
+
+      chartBubble = new Chart(ctxBubble, {
+        type: 'bubble',
+        data: {
+          datasets: [bubbleDataset],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          animation: {
+            duration: 1000,
+            easing: 'easeOutBounce',
+          },
+          plugins: {
+            title: {
+              display: true,
+              text: 'Cases and Deaths by Location',
+              color: 'black',
+              font: {
+                size: 20,
+                family: 'Poppins',
+              },
+            },
+          },
+          scales: {
+            x: {
+              title: {
+                display: true,
+                text: 'Reported At',
+                color: 'black',
+                font: {
+                  size: 12,
+                  family: 'Poppins',
+                },
+              },
+            },
+            y: {
+              title: {
+                display: true,
+                text: 'Deaths',
+                color: 'black',
+                font: {
+                  size: 12,
+                  family: 'Poppins',
+                },
+              },
+            },
+          },
+        },
+      });
+    }, (error) => {
+      console.error("Error retrieving data from Firestore: ", error);
+    });
+</script>
+
+</body>
+</html>

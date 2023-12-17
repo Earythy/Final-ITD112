@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Read CSV/Exceel</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+   <!-- Include Bootstrap CSS -->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+   <!-- Include DataTables CSS -->
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+  <!-- Include Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="assets/css/signin.css">
+      
+    <script src="https://kit.fontawesome.com/334c45a40c.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/logo.png" alt="">
+        <span class="d-none d-lg-block">Data Visualization</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div><!-- End Logo -->
+
+    <div class="search-bar">
+      <form class="search-form d-flex align-items-center" method="POST" action="#">
+        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+      </form>
+    </div><!-- End Search Bar -->
+
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li><!-- End Search Icon-->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-bell"></i>
+            <span class="badge bg-primary badge-number">4</span>
+          </a><!-- End Notification Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+            <li class="dropdown-header">
+              You have 4 new notifications
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-exclamation-circle text-warning"></i>
+              <div>
+                <h4>Lorem Ipsum</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>30 min. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-x-circle text-danger"></i>
+              <div>
+                <h4>Atque rerum nesciunt</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>1 hr. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-check-circle text-success"></i>
+              <div>
+                <h4>Sit rerum fuga</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>2 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="notification-item">
+              <i class="bi bi-info-circle text-primary"></i>
+              <div>
+                <h4>Dicta reprehenderit</h4>
+                <p>Quae dolorem earum veritatis oditseno</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </li>
+
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li class="dropdown-footer">
+              <a href="#">Show all notifications</a>
+            </li>
+
+          </ul><!-- End Notification Dropdown Items -->
+
+        </li><!-- End Notification Nav -->
+
+        <li class="nav-item dropdown">
+
+          <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+            <i class="bi bi-chat-left-text"></i>
+            <span class="badge bg-success badge-number">3</span>
+          </a><!-- End Messages Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+            <li class="dropdown-header">
+              You have 3 new messages
+              <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Maria Hudson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>4 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>Anna Nelson</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>6 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="message-item">
+              <a href="#">
+                <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+                <div>
+                  <h4>David Muldon</h4>
+                  <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                  <p>8 hrs. ago</p>
+                </div>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li class="dropdown-footer">
+              <a href="#">Show all messages</a>
+            </li>
+
+          </ul><!-- End Messages Dropdown Items -->
+
+        </li><!-- End Messages Nav -->
+
+        <li class="nav-item dropdown pe-3">
+
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+          </a><!-- End Profile Iamge Icon -->
+
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6>Admin</h6>
+              <span>Web Developer</span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-person"></i>
+                <span>My Profile</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+                <i class="bi bi-gear"></i>
+                <span>Account Settings</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+                <i class="bi bi-question-circle"></i>
+                <span>Need Help?</span>
+              </a>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+
+            <li>
+                <a class="dropdown-item d-flex align-items-center" id="logoutBtn">
+                  <i class="bi bi-box-arrow-right"></i>
+                  <span>Log Out</span>
+                </a>
+              </li>
+
+          </ul><!-- End Profile Dropdown Items -->
+        </li><!-- End Profile Nav -->
+
+      </ul>
+    </nav><!-- End Icons Navigation -->
+
+  </header><!-- End Header -->
+
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="dashboard.html">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span>
+        </a>
+      </li><!-- End Dashboard Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="dengue-form.html">
+              <i class="bi bi-circle"></i><span>Dengue Form</span>
+            </a>
+          </li>
+        </ul>
+      </li><!-- End Forms Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="dengue-table.html">
+                  <i class="bi bi-circle"></i><span>Dengue Table</span>
+                </a>
+              </li>
+        </ul>
+      </li><!-- End Tables Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+            <li>
+                <a href="dengue-charts.html">
+                  <i class="bi bi-circle"></i><span>Dengue Charts</span>
+                </a>
+              </li>
+        </ul>
+      </li><!-- End Charts Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link" href="read-csv.html">
+          <i class="bi bi-file-earmark-spreadsheet"></i>
+          <span>Read CSV/Exceel</span>
+        </a>
+      </li>
+
+      <li class="nav-heading">Pages</li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="users-profile.html">
+          <i class="bi bi-person"></i>
+          <span>Profile</span>
+        </a>
+      </li><!-- End Profile Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="pages-faq.html">
+          <i class="bi bi-question-circle"></i>
+          <span>F.A.Q</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+    </ul>
+
+  </aside><!-- End Sidebar-->
+
+    <!-- ======= Main ======= -->
+    <main id="main" class="main">
+
+      <div class="pagetitle">
+        <h1>Read CSV/Exceel</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+            <li class="breadcrumb-item active">Read File</li>
+          </ol>
+        </nav>
+      </div><!-- End Page Title -->
+      
+      <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Upload CSV/Exceel File</h5>
+
+      <div class="container">
+          <!-- New file input field for uploading CSV/Excel file -->
+          <div class="mb-3">
+              <input type="file" class="form-control" id="file" name="file" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required>
+          </div>
+          <div class="mb-3">
+              <button type="button" class="btn btn-success" id="readCsvBtn">Read CSV</button>
+              <button type="button" class="btn btn-primary" id="storeToDatabaseBtn">Store to Database</button>
+          </div>
+      </div>
+
+      <div class="container">
+          <!-- Loading Spinner -->
+          <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none;">
+              <span class="visually-hidden">Loading...</span>
+          </div>
+      </div>
+          
+      <div class="container">
+        <div class="table-responsive" id="dashboard">
+          <table class="table table-hover" id="readTable">
+                  <thead class="table-dark">
+                      <tr>
+                          <!-- Fields will be dynamically inserted here -->
+                      </tr>
+                  </thead>
+                  <tbody id="readTableBody">
+                      <!-- Display Data Here -->
+                  </tbody>
+              </table>
+          </div>
+      </div><br>
+
+      <h5 class="card-title">Data Visualization</h5>
+      <!-- Dropdowns for field selection -->
+          <div class="container">
+              <div class="mb-3">
+                  <label for="xAxisField" class="form-label">Select X-Axis Field:</label>
+                  <select class="form-select" id="xAxisField"></select>
+              </div>
+          
+              <div class="mb-3">
+                  <label for="yAxisField" class="form-label">Select Y-Axis Field:</label>
+                  <select class="form-select" id="yAxisField"></select>
+              </div>
+
+              <div class="mb-3">
+                  <label for="chartType" class="form-label">Select Chart Type:</label>
+                  <select class="form-select" id="chartType">
+                      <option value="bar">Bar Chart</option>
+                      <option value="line">Line Chart</option>
+                      <option value="pie">Pie Chart</option>
+                      <option value="doughnut">Doughnut Chart</option>
+                      <option value="scatter">Scatter Plot</option>
+                      <option value="area">Area Chart</option>
+                      <!-- Add more chart types as needed -->
+                  </select>
+              </div>
+          
+              <!-- Add a canvas to display the chart -->
+              <div class="mb-3">
+                  <canvas id="chartCanvas" width="800" height="400"></canvas>
+              </div>
+          </div>
+
+          <!-- Add the following HTML for the modal -->
+          <div class="modal" id="collectionModal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Enter Collection Name</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <input type="text" class="form-control" id="collectionNameInput" placeholder="Enter Collection Name">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="confirmCollectionBtn">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+  </section>
+
+  </main><!-- End #main -->
+  
+      <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+      <!-- Include Chart.js -->
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <!-- Include Bootstrap JS and Popper.js -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+      <!-- Include jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- Include DataTables JS -->
+      <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+      <!-- Include papaparse library for CSV parsing -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  
+      <script src="bundle.js"></script>
+
+      <script>
+        // Check if the user is authenticated
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (!user) {
+          // Redirect to the login page if not authenticated
+          window.location.href = "login.html";
+        }
+    </script>
+    
+      <script>
+          // Global variable to store CSV data
+          let csvData = [];
+
+          // Function to generate a random color
+          function getRandomColor() {
+              var letters = '0123456789ABCDEF';
+              var color = '#';
+              for (var i = 0; i < 6; i++) {
+                  color += letters[Math.floor(Math.random() * 16)];
+              }
+              return color;
+          }
+        
+          // Function to update the chart with selected fields
+          function updateChart(data, chartType, xField, yField) {
+            const chartCanvas = document.getElementById('chartCanvas');
+            const ctx = chartCanvas.getContext('2d');
+        
+            if (window.myChart) {
+              window.myChart.destroy();
+            }
+        
+            // Prepare chart data using selected fields
+          const labels = data.map(row => row[xField]);
+          let datasets = [];
+
+          if (chartType === 'bar' || chartType === 'line') {
+              // For bar and line charts, use one color per dataset
+              datasets = [{
+                  label: yField,
+                  data: data.map(row => row[yField]),
+                  backgroundColor: getRandomColor(),
+                  borderColor: getRandomColor(),
+                  borderWidth: 1
+              }];
+          } else if (chartType === 'pie' || chartType === 'doughnut') {
+              // For pie and doughnut charts, use a different color for each data point
+              const backgroundColors = data.map(() => getRandomColor());
+              datasets = [{
+                  label: yField,
+                  data: data.map(row => row[yField]),
+                  backgroundColor: backgroundColors
+              }];
+          }
+        
+            // Chart configuration
+            const options = {
+              responsive: true,
+              maintainAspectRatio: false
+            };
+        
+            // Create and render the chart
+            window.myChart = new Chart(ctx, {
+              type: chartType,
+              data: {
+                labels: labels,
+                datasets: datasets
+              },
+              options: options
+            });
+          }
+        
+          // Function to populate field selection dropdowns
+          function populateFieldSelection(data) {
+            const fields = Object.keys(data[0]);
+            const xAxisFieldSelect = document.getElementById('xAxisField');
+            const yAxisFieldSelect = document.getElementById('yAxisField');
+        
+            xAxisFieldSelect.innerHTML = '';
+            yAxisFieldSelect.innerHTML = '';
+        
+            fields.forEach(field => {
+              xAxisFieldSelect.innerHTML += `<option value="${field}">${field}</option>`;
+              yAxisFieldSelect.innerHTML += `<option value="${field}">${field}</option>`;
+            });
+          }
+        
+          // Function to update the table display
+          function updateTable(data) {
+            const readTable = $('#readTable');
+            const readTableBody = $('#readTableBody');
+        
+            readTable.find('thead tr').html('');
+            readTableBody.html('');
+        
+            if (data.length > 0) {
+              const fields = Object.keys(data[0]);
+        
+              fields.forEach(field => {
+                const sanitizedField = field.replace(/\s+/g, '_');
+                readTable.find('thead tr').append(`<th>${sanitizedField}</th>`);
+              });
+        
+              data.forEach(dataRow => {
+                const row = $('<tr>');
+        
+                fields.forEach(field => {
+                  row.append(`<td>${dataRow[field]}</td>`);
+                });
+        
+                readTableBody.append(row);
+              });
+        
+              // Initialize DataTable with scrollX option
+              readTable.DataTable({
+                  scrollX: true,
+              });
+            } else {
+              alert('The dataset is empty.');
+            }
+          }
+        
+          // Read CSV button functionality
+          document.getElementById('readCsvBtn').addEventListener('click', function () {
+            const fileInput = document.getElementById('file');
+            const file = fileInput.files[0];
+
+            if (file) {
+              showLoadingSpinner();
+              Papa.parse(file, {
+                header: true,
+                dynamicTyping: true,
+                complete: function (results) {
+                    csvData = results.data;
+                    populateFieldSelection(csvData); // Populate field selection dropdowns
+                    updateTable(csvData);
+                    hideLoadingSpinner();
+                    showSuccessAlert("CSV Read Successfully", "CSV file has been read successfully.");
+                },
+              });
+            } else {
+              // If no file is selected
+              showErrorAlert("File Not Selected", "Please select a file to read CSV/Excel.");
+            }
+          });
+
+          // Function to show success alert
+          function showSuccessAlert(title, text) {
+            Swal.fire({
+              icon: 'success',
+              title: title,
+              text: text,
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true
+            });
+          }
+
+          // Function to show error alert
+          function showErrorAlert(title, text) {
+            Swal.fire({
+              icon: 'error',
+              title: title,
+              text: text,
+              confirmButtonText: 'OK',
+            });
+          }
+
+        
+          // Chart type and field change event listeners
+          document.getElementById('chartType').addEventListener('change', updateChartBasedOnSelection);
+          document.getElementById('xAxisField').addEventListener('change', updateChartBasedOnSelection);
+          document.getElementById('yAxisField').addEventListener('change', updateChartBasedOnSelection);
+        
+          function updateChartBasedOnSelection() {
+            const selectedChartType = document.getElementById('chartType').value;
+            const selectedXField = document.getElementById('xAxisField').value;
+            const selectedYField = document.getElementById('yAxisField').value;
+            updateChart(csvData, selectedChartType, selectedXField, selectedYField);
+          }
+        
+          // Function to show the loading spinner
+          function showLoadingSpinner() {
+            $('#loadingSpinner').show();
+          }
+        
+          // Function to hide the loading spinner
+          function hideLoadingSpinner() {
+            $('#loadingSpinner').hide();
+          }
+        </script>
+
+        <script type="module">
+          // Import the functions you need from the SDKs you need
+          import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+          import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+          import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+          import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+        
+          // Your web app's Firebase configuration
+          const firebaseConfig = {
+  apiKey: "AIzaSyD8N5Yx1JeuhxA8chqk7GPD_lT3FwZZZBI",
+  authDomain: "data-storytelling-itd112-bd302.firebaseapp.com",
+  projectId: "data-storytelling-itd112-bd302",
+  storageBucket: "data-storytelling-itd112-bd302.appspot.com",
+  messagingSenderId: "697986110383",
+  appId: "1:697986110383:web:a2bbedf7a20c843266d55a",
+  measurementId: "G-K8PJFJTBEY"
+};
+        
+          // Initialize Firebase
+          const app = initializeApp(firebaseConfig);
+          const analytics = getAnalytics(app);
+          const auth = getAuth(app);
+        
+          // Function to show success alert
+          function showSuccessAlert(title, text) {
+            Swal.fire({
+              icon: 'success',
+              title: title,
+              text: text,
+              confirmButtonText: 'OK'
+            });
+          }
+        
+          // Function to show error alert
+          function showErrorAlert(title, text) {
+            Swal.fire({
+              icon: 'error',
+              title: title,
+              text: text,
+              confirmButtonText: 'OK'
+            });
+          }
+        
+          // Function to store data to Firestore
+          async function storeDataToFirestore(data, collectionName) {
+            // Get a reference to the Firestore database
+            const db = getFirestore(app);
+        
+            // Get a reference to the collection
+            const collectionRef = collection(db, collectionName);
+        
+            // Add each record to the collection
+            await Promise.all(data.map(async (record) => {
+              await addDoc(collectionRef, record);
+            }));
+        
+            // Show success alert using SweetAlert
+            showSuccessAlert("Data Stored Successfully", "Data has been stored to Firestore.");
+          }
+        
+          // Function to prompt the user for the Firestore collection name
+          function promptForCollectionName() {
+            const collectionModal = new bootstrap.Modal(document.getElementById('collectionModal'));
+            collectionModal.show();
+        
+            return new Promise((resolve, reject) => {
+              document.getElementById('confirmCollectionBtn').addEventListener('click', () => {
+                const collectionNameInput = document.getElementById('collectionNameInput');
+                const collectionName = collectionNameInput.value.trim();
+        
+                if (collectionName) {
+                  resolve(collectionName);
+                } else {
+                  reject('Collection name cannot be empty.');
+                }
+              });
+            });
+          }
+        
+          // Function to show a loader
+        function showLoader() {
+          Swal.fire({
+            title: 'Storing Data',
+            text: 'Please wait...',
+            allowOutsideClick: false, // Prevent user from closing the modal
+            showConfirmButton: false,
+            onBeforeOpen: () => {
+              Swal.showLoading();
+            },
+          });
+        }
+
+        // Function to hide the loader
+        function hideLoader() {
+          Swal.close();
+        }
+
+        // "Store to Database" button click event
+        document.getElementById('storeToDatabaseBtn').addEventListener('click', async function () {
+          if (csvData.length > 0) {
+            try {
+              // Prompt the user for the Firestore collection name
+              const collectionName = await promptForCollectionName();
+
+              // If a collection name is provided, store the data to Firestore
+              if (collectionName) {
+                // Show loader before storing data
+                showLoader();
+
+                // Store data to Firestore
+                await storeDataToFirestore(csvData, collectionName);
+
+                // Hide loader after data is stored
+                hideLoader();
+
+                // Automatically close the modal
+                const collectionModal = new bootstrap.Modal(document.getElementById('collectionModal'));
+                collectionModal.hide();
+              }
+            } catch (error) {
+              // Handle errors, e.g., collection name is empty
+              console.error('Error:', error);
+              showErrorAlert('Error', error);
+              
+              // Hide loader on error
+              hideLoader();
+            }
+          } else {
+            // If there is no data, show an error alert
+            showErrorAlert("No Data to Store", "Please read a CSV file before storing data.");
+          }
+        });
+        </script>
+        
+        
+  </body>
+  </html>

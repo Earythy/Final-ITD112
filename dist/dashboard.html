@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+
+  <link rel="icon" href="images/final-logo.png">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Bootstrap Icons CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.21.0/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Your custom stylesheet -->
+  <link rel="stylesheet" href="static/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap">
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-firestore.js"></script>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Bootstrap JS (Popper.js and Bootstrap JS) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Include DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+
+  <!-- Include Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="https://kit.fontawesome.com/334c45a40c.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <!-- Leaflet JavaScript -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+    <!-- ======= Navigation ======= -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <a class="navbar-brand" href="dashboard.html">Dashboard</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="project1.html">Project 1 <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="project2.html">Project 2 <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="project3.html">Project 3 <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="logoutBtn" href="#">
+              <i class="bi bi-box-arrow-up"></i>Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ======= Main ======= -->
+    <div class="card">
+      <div class="card-body">
+
+        <div class="container">
+          <!-- Container for file input and buttons with dark blue transparent background -->
+          <div class="file-container">
+            <h5 class="card-title">Upload CSV/Excel File</h5>
+            <div class="mb-3">
+              <input type="file" class="form-control" id="file" name="file"
+                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                required>
+            </div>
+            <div class="mb-3">
+              <button type="button" class="btn btn-warning" id="readCsvBtn">Read CSV</button>
+              <button type="button" class="btn btn-primary" id="storeToDatabaseBtn">Store to Database</button>
+            </div><br>
+
+            <div id="loadingSpinner" class="spinner-border text-primary" role="status" style="display: none; color: white;">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+
+            <div class="table-responsive" id="dashboard">
+              <table class="table table-hover" id="readTable">
+                <thead class="table table-hover">
+                  <tr>
+                  </tr>
+                </thead>
+                <tbody id="readTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div><br>
+
+        <div class="container">
+          <!-- Container for file input and buttons with dark blue transparent background -->
+          <div class="file-container">
+            <h5 class="card-title">Data Visualization</h5>
+
+            <div class="mb-3">
+              <label for="xAxisField" class="form-label">Select X-Axis Field:</label>
+              <select class="form-select" id="xAxisField"></select>
+            </div>
+
+            <div class="mb-3">
+              <label for="yAxisField" class="form-label">Select Y-Axis Field:</label>
+              <select class="form-select" id="yAxisField"></select>
+            </div>
+
+            <div class="mb-3">
+              <label for="chartType" class="form-label">Select Chart Type:</label>
+              <select class="form-select" id="chartType">
+                <option value="bar">Bar Chart</option>
+                <option value="line">Line Chart</option>
+                <option value="pie">Pie Chart</option>
+                <option value="doughnut">Doughnut Chart</option>
+                <option value="scatter">Scatter Plot</option>
+                <option value="area">Area Chart</option>
+                <option value="dotmap">Dot Map</option>
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <canvas id="chartCanvas" width="800" height="400"></canvas>
+            </div>
+          </div>
+
+          <div class="modal" id="collectionModal" tabindex="-1">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Enter Collection Name</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <input type="text" class="form-control" id="collectionNameInput" placeholder="Enter Collection Name">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" id="confirmCollectionBtn">Confirm</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+  <script src="bundle.js"></script>
+
+  <script>
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <script>
+    let csvData = [];
+
+    function getRandomColor() {
+      var letters = '0123456789ABCDEF';
+      var color = '#';
+      for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+
+    function createDotMap(data) {
+      const map = L.map('chartCanvas').setView([0, 0], 2);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      data.forEach(point => {
+        const marker = L.marker([point.latitude, point.longitude]).addTo(map);
+      });
+    }
+
+    function updateChart(data, chartType, xField, yField) {
+      const chartCanvas = document.getElementById('chartCanvas');
+      const ctx = chartCanvas.getContext('2d');
+
+      if (window.myChart) {
+        window.myChart.destroy();
+      }
+
+      const labels = data.map(row => row[xField]);
+      let datasets = [];
+
+      if (chartType === 'dotmap' && xField === 'longitude' && yField === 'latitude') {
+        createDotMap(data);
+        return;
+      }
+
+      if (chartType === 'bar' || chartType === 'line') {
+        datasets = [{
+          label: yField,
+          data: data.map(row => row[yField]),
+          backgroundColor: getRandomColor(),
+          borderColor: getRandomColor(),
+          borderWidth: 1
+        }];
+      } else if (chartType === 'pie' || chartType === 'doughnut') {
+        const backgroundColors = data.map(() => getRandomColor());
+        datasets = [{
+          label: yField,
+          data: data.map(row => row[yField]),
+          backgroundColor: backgroundColors
+        }];
+      }
+
+      const options = {
+        responsive: true,
+        maintainAspectRatio: false
+      };
+
+      window.myChart = new Chart(ctx, {
+        type: chartType,
+        data: {
+          labels: labels,
+          datasets: datasets
+        },
+        options: options
+      });
+    }
+
+    function populateFieldSelection(data) {
+      const fields = Object.keys(data[0]);
+      const xAxisFieldSelect = document.getElementById('xAxisField');
+      const yAxisFieldSelect = document.getElementById('yAxisField');
+
+      xAxisFieldSelect.innerHTML = '';
+      yAxisFieldSelect.innerHTML = '';
+
+      fields.forEach(field => {
+        xAxisFieldSelect.innerHTML += `<option value="${field}">${field}</option>`;
+        yAxisFieldSelect.innerHTML += `<option value="${field}">${field}</option>`;
+      });
+    }
+
+    function updateTable(data) {
+      const readTable = $('#readTable');
+      const readTableBody = $('#readTableBody');
+
+      readTable.find('thead tr').html('');
+      readTableBody.html('');
+
+      if (data.length > 0) {
+        const fields = Object.keys(data[0]);
+
+        fields.forEach(field => {
+          const sanitizedField = field.replace(/\s+/g, '_');
+          readTable.find('thead tr').append(`<th>${sanitizedField}</th>`);
+        });
+
+        data.forEach(dataRow => {
+          const row = $('<tr>');
+
+          fields.forEach(field => {
+            row.append(`<td>${dataRow[field]}</td>`);
+          });
+
+          readTableBody.append(row);
+        });
+
+        readTable.DataTable({
+          scrollX: true,
+        });
+      } else {
+        alert('The dataset is empty.');
+      }
+    }
+
+    document.getElementById('readCsvBtn').addEventListener('click', function () {
+      const fileInput = document.getElementById('file');
+      const file = fileInput.files[0];
+
+      if (file) {
+        showLoadingSpinner();
+        Papa.parse(file, {
+          header: true,
+          dynamicTyping: true,
+          complete: function (results) {
+            csvData = results.data;
+            populateFieldSelection(csvData);
+            updateTable(csvData);
+            hideLoadingSpinner();
+            showSuccessAlert("CSV Read Successfully", "CSV file has been read successfully.");
+          },
+        });
+      } else {
+        showErrorAlert("File Not Selected", "Please select a file to read CSV/Excel.");
+      }
+    });
+
+    function showSuccessAlert(title, text) {
+      Swal.fire({
+        icon: 'success',
+        title: title,
+        text: text,
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true
+      });
+    }
+
+    function showErrorAlert(title, text) {
+      Swal.fire({
+        icon: 'error',
+        title: title,
+        text: text,
+        confirmButtonText: 'OK',
+      });
+    }
+
+    document.getElementById('chartType').addEventListener('change', updateChartBasedOnSelection);
+    document.getElementById('xAxisField').addEventListener('change', updateChartBasedOnSelection);
+    document.getElementById('yAxisField').addEventListener('change', updateChartBasedOnSelection);
+
+    function updateChartBasedOnSelection() {
+      const selectedChartType = document.getElementById('chartType').value;
+      const selectedXField = document.getElementById('xAxisField').value;
+      const selectedYField = document.getElementById('yAxisField').value;
+      updateChart(csvData, selectedChartType, selectedXField, selectedYField);
+    }
+
+    function showLoadingSpinner() {
+      $('#loadingSpinner').show();
+    }
+
+    function hideLoadingSpinner() {
+      $('#loadingSpinner').hide();
+    }
+  </script>
+
+      <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-analytics.js";
+        import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/9.10.0/firebase-firestore.js";
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+  apiKey: "AIzaSyD8N5Yx1JeuhxA8chqk7GPD_lT3FwZZZBI",
+  authDomain: "data-storytelling-itd112-bd302.firebaseapp.com",
+  projectId: "data-storytelling-itd112-bd302",
+  storageBucket: "data-storytelling-itd112-bd302.appspot.com",
+  messagingSenderId: "697986110383",
+  appId: "1:697986110383:web:a2bbedf7a20c843266d55a",
+  measurementId: "G-K8PJFJTBEY"
+};
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+      
+        // Function to show success alert
+        function showSuccessAlert(title, text) {
+          Swal.fire({
+            icon: 'success',
+            title: title,
+            text: text,
+            confirmButtonText: 'OK'
+          });
+        }
+      
+        // Function to show error alert
+        function showErrorAlert(title, text) {
+          Swal.fire({
+            icon: 'error',
+            title: title,
+            text: text,
+            confirmButtonText: 'OK'
+          });
+        }
+
+        // Logout Button Click Event
+      document.addEventListener("DOMContentLoaded", function () {
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+          logoutBtn.addEventListener("click", function () {
+            signOut(auth).then(() => {
+              // Sign-out successful.
+              localStorage.removeItem('user'); // Clear user data from localStorage
+              // Show success alert using SweetAlert
+              Swal.fire({
+                icon: 'success',
+                title: 'Logged Out Successfully',
+                text: 'Redirecting to Login page...',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true
+              }).then(() => {
+                // Redirect to the login page
+                window.location.href = "login.html";
+              });
+            }).catch((error) => {
+              // An error happened.
+              console.error('Logout Error:', error);
+            });
+          });
+        }
+      });
+      
+        // Function to store data to Firestore
+        async function storeDataToFirestore(data, collectionName) {
+          // Get a reference to the Firestore database
+          const db = getFirestore(app);
+      
+          // Get a reference to the collection
+          const collectionRef = collection(db, collectionName);
+      
+          // Add each record to the collection
+          await Promise.all(data.map(async (record) => {
+            await addDoc(collectionRef, record);
+          }));
+      
+          // Show success alert using SweetAlert
+          showSuccessAlert("Data Stored Successfully", "Data has been stored to Firestore.");
+        }
+      
+        // Function to prompt the user for the Firestore collection name
+        function promptForCollectionName() {
+          const collectionModal = new bootstrap.Modal(document.getElementById('collectionModal'));
+          collectionModal.show();
+      
+          return new Promise((resolve, reject) => {
+            document.getElementById('confirmCollectionBtn').addEventListener('click', () => {
+              const collectionNameInput = document.getElementById('collectionNameInput');
+              const collectionName = collectionNameInput.value.trim();
+      
+              if (collectionName) {
+                resolve(collectionName);
+              } else {
+                reject('Collection name cannot be empty.');
+              }
+            });
+          });
+        }
+      
+         // Function to show a loader
+      function showLoader() {
+        Swal.fire({
+          title: 'Storing Data',
+          text: 'Please wait...',
+          allowOutsideClick: false, // Prevent user from closing the modal
+          showConfirmButton: false,
+          onBeforeOpen: () => {
+            Swal.showLoading();
+          },
+        });
+      }
+
+      // Function to hide the loader
+      function hideLoader() {
+        Swal.close();
+      }
+
+      // "Store to Database" button click event
+      document.getElementById('storeToDatabaseBtn').addEventListener('click', async function () {
+        if (csvData.length > 0) {
+          try {
+            // Prompt the user for the Firestore collection name
+            const collectionName = await promptForCollectionName();
+
+            // If a collection name is provided, store the data to Firestore
+            if (collectionName) {
+              // Show loader before storing data
+              showLoader();
+
+              // Store data to Firestore
+              await storeDataToFirestore(csvData, collectionName);
+
+              // Hide loader after data is stored
+              hideLoader();
+
+              // Automatically close the modal
+              const collectionModal = new bootstrap.Modal(document.getElementById('collectionModal'));
+              collectionModal.hide();
+            }
+          } catch (error) {
+            // Handle errors, e.g., collection name is empty
+            console.error('Error:', error);
+            showErrorAlert('Error', error);
+            
+            // Hide loader on error
+            hideLoader();
+          }
+        } else {
+          // If there is no data, show an error alert
+          showErrorAlert("No Data to Store", "Please read a CSV file before storing data.");
+        }
+      });
+      </script>
+
+<script src="static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Tables / Dengue</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Include Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Include DataTables JS -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
+
+   <!-- Include DataTables CSS with additional styling -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.css">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- ===== Iconscout CSS ===== -->
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <link rel="stylesheet" href="assets/css/signin.css">
+    
+  <script src="https://kit.fontawesome.com/334c45a40c.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
+
+</head>
+
+<body>
+
+ <!-- ======= Header ======= -->
+ <header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="index.html" class="logo d-flex align-items-center">
+      <img src="assets/img/logo.png" alt="">
+      <span class="d-none d-lg-block">Data Visualization</span>
+    </a>
+    <i class="bi bi-list toggle-sidebar-btn"></i>
+  </div><!-- End Logo -->
+
+  <div class="search-bar">
+    <form class="search-form d-flex align-items-center" method="POST" action="#">
+      <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+      <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+    </form>
+  </div><!-- End Search Bar -->
+
+  <nav class="header-nav ms-auto">
+    <ul class="d-flex align-items-center">
+
+      <li class="nav-item d-block d-lg-none">
+        <a class="nav-link nav-icon search-bar-toggle " href="#">
+          <i class="bi bi-search"></i>
+        </a>
+      </li><!-- End Search Icon-->
+
+      <li class="nav-item dropdown">
+
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-bell"></i>
+          <span class="badge bg-primary badge-number">4</span>
+        </a><!-- End Notification Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+          <li class="dropdown-header">
+            You have 4 new notifications
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-exclamation-circle text-warning"></i>
+            <div>
+              <h4>Lorem Ipsum</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>30 min. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-x-circle text-danger"></i>
+            <div>
+              <h4>Atque rerum nesciunt</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>1 hr. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-check-circle text-success"></i>
+            <div>
+              <h4>Sit rerum fuga</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>2 hrs. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="notification-item">
+            <i class="bi bi-info-circle text-primary"></i>
+            <div>
+              <h4>Dicta reprehenderit</h4>
+              <p>Quae dolorem earum veritatis oditseno</p>
+              <p>4 hrs. ago</p>
+            </div>
+          </li>
+
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li class="dropdown-footer">
+            <a href="#">Show all notifications</a>
+          </li>
+
+        </ul><!-- End Notification Dropdown Items -->
+
+      </li><!-- End Notification Nav -->
+
+      <li class="nav-item dropdown">
+
+        <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+          <i class="bi bi-chat-left-text"></i>
+          <span class="badge bg-success badge-number">3</span>
+        </a><!-- End Messages Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+          <li class="dropdown-header">
+            You have 3 new messages
+            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="message-item">
+            <a href="#">
+              <img src="assets/img/messages-1.jpg" alt="" class="rounded-circle">
+              <div>
+                <h4>Maria Hudson</h4>
+                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                <p>4 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="message-item">
+            <a href="#">
+              <img src="assets/img/messages-2.jpg" alt="" class="rounded-circle">
+              <div>
+                <h4>Anna Nelson</h4>
+                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                <p>6 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="message-item">
+            <a href="#">
+              <img src="assets/img/messages-3.jpg" alt="" class="rounded-circle">
+              <div>
+                <h4>David Muldon</h4>
+                <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                <p>8 hrs. ago</p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li class="dropdown-footer">
+            <a href="#">Show all messages</a>
+          </li>
+
+        </ul><!-- End Messages Dropdown Items -->
+
+      </li><!-- End Messages Nav -->
+
+      <li class="nav-item dropdown pe-3">
+
+        <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+          <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+          <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+        </a><!-- End Profile Iamge Icon -->
+
+        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+          <li class="dropdown-header">
+            <h6>Admin</h6>
+            <span>Web Developer</span>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <i class="bi bi-person"></i>
+              <span>My Profile</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <i class="bi bi-gear"></i>
+              <span>Account Settings</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+            <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
+              <i class="bi bi-question-circle"></i>
+              <span>Need Help?</span>
+            </a>
+          </li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+
+          <li>
+              <a class="dropdown-item d-flex align-items-center" id="logoutBtn">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Log Out</span>
+              </a>
+            </li>
+
+        </ul><!-- End Profile Dropdown Items -->
+      </li><!-- End Profile Nav -->
+
+    </ul>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="dashboard.html">
+        <i class="bi bi-grid"></i>
+        <span>Dashboard</span>
+      </a>
+    </li><!-- End Dashboard Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="dengue-form.html">
+            <i class="bi bi-circle"></i><span>Dengue Form</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End Forms Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+              <a href="dengue-table.html" class="active">
+                <i class="bi bi-circle"></i><span>Dengue Table</span>
+              </a>
+            </li>
+      </ul>
+    </li><!-- End Tables Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+          <li>
+              <a href="dengue-charts.html">
+                <i class="bi bi-circle"></i><span>Dengue Charts</span>
+              </a>
+            </li>
+      </ul>
+    </li><!-- End Charts Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="read-csv.html">
+        <i class="bi bi-file-earmark-spreadsheet"></i>
+        <span>Read CSV/Exceel</span>
+      </a>
+    </li>
+
+    <li class="nav-heading">Pages</li>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="users-profile.html">
+        <i class="bi bi-person"></i>
+        <span>Profile</span>
+      </a>
+    </li><!-- End Profile Page Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="pages-faq.html">
+        <i class="bi bi-question-circle"></i>
+        <span>F.A.Q</span>
+      </a>
+    </li><!-- End F.A.Q Page Nav -->
+
+  </ul>
+
+</aside><!-- End Sidebar-->
+
+ <!-- ======= Main ======= -->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Data Tables</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="dashboard.html">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Dengue</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+                <!-- Redirect to add_form.html when the button is clicked -->
+                <button type="button" style="margin-bottom: 20px;" class="btn btn-primary" onclick="redirectToAddForm()">Add a New Case</button><br>
+        </div>
+        </div>
+    </section>
+      
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Dengue Cases</h5>
+
+                <!-- Table with stripped rows -->
+                <div class="table-responsive" id="dashboard">
+                  <table class="table table-hover" id="dashboardTable">
+                    <thead class="table-dark">
+                      <tr>
+                        <th>Location</th>
+                        <th>No of Cases</th>
+                        <th>No of Deaths</th>
+                        <th>Date Reported</th>
+                        <th>Region</th>
+                        <th style="width: 80px">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody id="dashboardTableBody">
+                      <!-- Display Data Here -->
+                    </tbody>
+                  </table>
+                  <!-- End Table with stripped rows -->
+                </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal for Edit Case -->
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editModalLabel">Edit Case</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Your form fields for editing here -->
+          <form id="editCaseForm">
+            <input type="hidden" id="editId">
+            <div class="mb-3">
+              <label for="editLoc" class="form-label">Location</label>
+              <input type="text" class="form-control" id="editLoc" required>
+            </div>
+            <div class="mb-3">
+              <label for="editCases" class="form-label">Number of Cases</label>
+              <input type="number" class="form-control" id="editCases" required>
+            </div>
+            <div class="mb-3">
+              <label for="editDeaths" class="form-label">Number of Deaths</label>
+              <input type="number" class="form-control" id="editDeaths" required>
+            </div>
+            <div class="mb-3">
+              <label for="editReportedAt" class="form-label">Date</label>
+              <input type="date" class="form-control" id="editReportedAt" required>
+            </div>
+            <div class="mb-3">
+              <label for="editRegion" class="form-label">Region</label>
+              <input type="text" class="form-control" id="editRegion" required>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" onclick="saveEdit()">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </main><!-- End #main -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Include jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Include DataTables JS -->
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.js"></script>
+  
+  <!-- Include papaparse library for CSV parsing -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.min.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <script src="bundle.js"></script>
+
+</body>
+</html>
+
+<script>
+  // Check if the user is authenticated
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (!user) {
+    // Redirect to the login page if not authenticated
+    window.location.href = "login.html";
+  }
+</script>
+
+ <!-- JavaScript function to redirect to add_form.html -->
+ <script>
+    function redirectToAddForm() {
+      window.location.href = 'dengue-form.html';
+    }
+  </script>
+
+  <script>
+   // Function to update the dashboard display
+  function updateDashboard(data) {
+    const dashboardTableBody = document.getElementById('dashboardTableBody');
+    dashboardTableBody.innerHTML = ''; // Clear previous content
+
+    data.forEach((caseData) => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${caseData.loc}</td>
+        <td>${caseData.cases}</td>
+        <td>${caseData.deaths}</td>
+        <td>${caseData.reportedAt}</td>
+        <td>${caseData.region}</td>
+        <td>
+          <button type="button" class="btn btn-warning" onclick="openEditModal('${caseData.id}', '${caseData.loc}', ${caseData.cases}, ${caseData.deaths}, '${caseData.reportedAt}', '${caseData.region}')">
+            <i class="bi bi-pencil"></i> <!-- Pencil icon for edit -->
+          </button>
+          <button type="button" class="btn btn-danger" onclick="deleteCase('${caseData.id}')">
+            <i class="bi bi-trash"></i> <!-- Trash icon for delete -->
+          </button>
+        </td>
+      `;
+      dashboardTableBody.appendChild(row);
+    });
+
+    // Initialize DataTable after updating the content
+    $('#dashboardTable').DataTable();
+  }
+
+    // Function to open the Edit modal and pre-fill data
+    function openEditModal(id, loc, cases, deaths, reportedAt, region) {
+      // Set the values of the input fields in the modal
+      document.getElementById('editId').value = id;
+      document.getElementById('editLoc').value = loc;
+      document.getElementById('editCases').value = cases;
+      document.getElementById('editDeaths').value = deaths;
+      document.getElementById('editReportedAt').value = reportedAt;
+      document.getElementById('editRegion').value = region;
+  
+      // Show the Edit modal
+      const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+      editModal.show();
+    }
+
+    async function saveEdit() {
+      const editId = document.getElementById('editId').value;
+      const editLoc = document.getElementById('editLoc').value;
+      const editCases = parseInt(document.getElementById('editCases').value);
+      const editDeaths = parseInt(document.getElementById('editDeaths').value);
+      const editReportedAt = document.getElementById('editReportedAt').value;
+      const editRegion = document.getElementById('editRegion').value;
+  
+      try {
+        // Update the document in Firestore
+        await updateDoc(doc(colRef, editId), {
+          loc: editLoc,
+          cases: editCases,
+          deaths: editDeaths,
+          reportedAt: editReportedAt,
+          region: editRegion,
+        });
+  
+        // Close the modal
+        const editModal = new bootstrap.Modal(document.getElementById('editModal'));
+        editModal.hide();
+      } catch (error) {
+        console.error('Error updating document: ', error);
+      }
+    }
+  
+    // Add a listener for the form submission
+    const editCaseForm = document.getElementById('editCaseForm');
+    editCaseForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      saveEdit();
+    });
+  </script>
+
+</body>
+</html>
